@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portofolio Interaktif - Muhammad Tasyhar, S.Pd., MM</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Chosen Palette: Professional Calm -->
+    <!-- Application Structure Plan: Aplikasi ini dirancang dengan struktur tematik yang berfokus pada pengguna, bukan mengikuti urutan CV asli. Strukturnya adalah: 1. Header (Ringkasan Profesional), 2. Navigasi Cepat, 3. Visualisasi Keahlian (menggunakan Chart.js untuk ringkasan cepat), 4. Detail Pengalaman Interaktif (dengan filter kategori untuk memudahkan eksplorasi), 5. Pendidikan & Kontribusi Lainnya. Struktur ini dipilih untuk memungkinkan perekrut atau pihak yang berkepentingan dengan cepat memahami keahlian utama dan kemudian mendalami area spesifik yang relevan bagi mereka, meningkatkan kemudahan konsumsi informasi dan navigasi. -->
+    <!-- Visualization & Content Choices: 1. Ringkasan Pengalaman (Donut Chart): Info -> 18 item pengalaman kerja. Goal -> Sintesis & Ringkasan. Viz -> Donut Chart. Interaction -> Tooltip saat hover. Justification -> Memberikan gambaran visual yang cepat tentang fokus karier (misalnya, porsi terbesar pada Pelatihan & Fasilitasi). Library -> Chart.js. 2. Daftar Pengalaman (Filterable List): Info -> Detail setiap pengalaman. Goal -> Eksplorasi & Organisasi. Presentation -> Daftar yang dapat difilter. Interaction -> Klik tombol kategori untuk menampilkan/menyembunyikan item yang relevan. Justification -> Mengatasi daftar pengalaman yang panjang agar tidak membanjiri pengguna dan memungkinkan mereka fokus pada peran tertentu (misalnya, hanya melihat pengalaman sebagai Narasumber). Method -> Vanilla JS. -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8f7f4;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 450px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 300px;
+            max-height: 400px;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 350px;
+            }
+        }
+        .active-filter {
+            background-color: #3b82f6 !important;
+            color: white !important;
+            border-color: #3b82f6 !important;
+        }
+    </style>
+</head>
+<body class="text-gray-800">
+
+    <header class="bg-white shadow-sm sticky top-0 z-50">
+        <nav class="container mx-auto px-6 py-4 flex flex-col md:flex-row justify-between items-center">
+            <div class="flex items-center space-x-4 mb-4 md:mb-0">
+                <img src="foto_pp.jpeg" onerror="this.onerror=null; this.src='data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBAQEBAgEBBAQFCgYFBwYGAgYJBwYKDBUGCiQICzAgJCQkMDBYQEBAMJCQYKDw0QEw8QTXhEQg8YJkgyP//Z';" alt="Foto Muhammad Tasyhar" class="rounded-full w-24 h-24 object-cover border-4 border-white shadow-lg">
+                <div>
+                    <h1 class="text-xl md:text-2xl font-bold text-blue-600">Muhammad Tasyhar, S.Pd., MM</h1>
+                    <p class="text-sm text-gray-500">Praktisi dan Ahli Pendidikan</p>
+                </div>
+            </div>
+            <div class="flex space-x-6">
+                <a href="#profil" class="text-gray-600 hover:text-blue-600 transition duration-300">Profil</a>
+                <a href="#visualisasi" class="text-gray-600 hover:text-blue-600 transition duration-300">Visualisasi Karier</a>
+                <a href="#pengalaman" class="text-gray-600 hover:text-blue-600 transition duration-300">Pengalaman</a>
+                <a href="#pendidikan" class="text-gray-600 hover:text-blue-600 transition duration-300">Pendidikan</a>
+            </div>
+        </nav>
+    </header>
+
+    <main class="container mx-auto px-6 py-12">
+        <section id="profil" class="text-center mb-16">
+            <div class="max-w-4xl mx-auto bg-white p-8 rounded-xl shadow-md">
+                <h2 class="text-3xl font-bold text-gray-800 mb-4">Ringkasan Profesional</h2>
+                <p class="text-lg text-gray-600 leading-relaxed">
+                    Praktisi pendidikan dengan pengalaman lebih dari dua dekade, memiliki keahlian mendalam di bidang Administrasi Perkantoran, Pengembangan Kurikulum, dan Peningkatan Kompetensi Pendidik. Terbukti memiliki rekam jejak yang solid sebagai narasumber, fasilitator, penulis materi ajar, dan juri di tingkat nasional. Menguasai implementasi Kurikulum 2013, Kurikulum Merdeka, serta Perencanaan Berbasis Data (PBD) untuk kemajuan pendidikan Indonesia.
+                </p>
+                <div class="mt-8 flex justify-center items-center space-x-6 text-gray-600">
+                    <div class="flex items-center space-x-2">
+                        <span class="text-xl">📧</span>
+                        <span>t5r181590@gmail.com</span>
+                    </div>
+                    <div class="flex items-center space-x-2">
+                        <span class="text-xl">📞</span>
+                        <span>081380121442/082114327776</span>
+                    </div>
+                    <div class="flex items-center space-x-2">
+                         <span class="text-xl">📍</span>
+                        <span>Depok, Jawa Barat</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="visualisasi" class="mb-16">
+            <div class="max-w-4xl mx-auto bg-white p-8 rounded-xl shadow-md">
+                <h2 class="text-3xl font-bold text-center mb-2">Visualisasi Jejak Karier</h2>
+                <p class="text-center text-gray-600 mb-8">
+                    Ringkasan visual ini mengkategorikan sebaran pengalaman profesional untuk memberikan gambaran cepat mengenai fokus dan kontribusi utama dalam dunia pendidikan. Arahkan kursor ke bagian diagram untuk melihat detail.
+                </p>
+                <div class="chart-container">
+                    <canvas id="experienceChart"></canvas>
+                </div>
+            </div>
+        </section>
+
+        <section id="pengalaman" class="mb-16">
+            <div class="max-w-4xl mx-auto">
+                <h2 class="text-3xl font-bold text-center mb-2">Pengalaman Profesional Interaktif</h2>
+                <p class="text-center text-gray-600 mb-8">
+                    Jelajahi beragam pengalaman dengan memilih kategori di bawah ini. Setiap peran mencerminkan kontribusi signifikan dalam peningkatan kualitas pendidikan dan sumber daya manusia di Indonesia.
+                </p>
+                <div id="filters" class="flex flex-wrap justify-center gap-2 md:gap-4 mb-8">
+                    <button data-filter="all" class="filter-btn active-filter text-sm md:text-base px-4 py-2 bg-white border-2 border-gray-300 text-gray-700 rounded-full hover:bg-blue-500 hover:text-white hover:border-blue-500 transition duration-300">Semua</button>
+                    <button data-filter="Pelatihan & Fasilitasi" class="filter-btn text-sm md:text-base px-4 py-2 bg-white border-2 border-gray-300 text-gray-700 rounded-full hover:bg-blue-500 hover:text-white hover:border-blue-500 transition duration-300">Pelatihan & Fasilitasi</button>
+                    <button data-filter="Pengembangan Konten" class="filter-btn text-sm md:text-base px-4 py-2 bg-white border-2 border-gray-300 text-gray-700 rounded-full hover:bg-blue-500 hover:text-white hover:border-blue-500 transition duration-300">Pengembangan Konten</button>
+                    <button data-filter="Asesmen & Juri" class="filter-btn text-sm md:text-base px-4 py-2 bg-white border-2 border-gray-300 text-gray-700 rounded-full hover:bg-blue-500 hover:text-white hover:border-blue-500 transition duration-300">Asesmen & Juri</button>
+                    <button data-filter="Pengajaran Akademis" class="filter-btn text-sm md:text-base px-4 py-2 bg-white border-2 border-gray-300 text-gray-700 rounded-full hover:bg-blue-500 hover:text-white hover:border-blue-500 transition duration-300">Pengajaran Akademis</button>
+                </div>
+
+                <div id="experience-list" class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                </div>
+            </div>
+        </section>
+
+        <section id="pendidikan" class="mb-16">
+            <div class="max-w-4xl mx-auto bg-white p-8 rounded-xl shadow-md">
+                <h2 class="text-3xl font-bold text-center mb-8">Pendidikan & Kualifikasi</h2>
+                 <div class="space-y-6">
+                    <div class="flex items-start space-x-4">
+                        <div class="bg-blue-100 text-blue-600 p-3 rounded-full text-2xl">🎓</div>
+                        <div>
+                            <h3 class="font-bold text-xl">S2 - Magister Manajemen (MM)</h3>
+                            <p class="text-gray-600">Sekolah Tinggi Ilmu Ekonomi (STIE), Indonesia School of Management (ISM)</p>
+                            <p class="text-sm text-gray-500">Konsentrasi: Manajemen Pendidikan</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start space-x-4">
+                        <div class="bg-blue-100 text-blue-600 p-3 rounded-full text-2xl">🎓</div>
+                        <div>
+                            <h3 class="font-bold text-xl">S2 - Magister Pendidikan (M.Pd)</h3>
+                            <p class="text-gray-600">Universitas Negeri Jakarta (UNJ)</p>
+                            <p class="text-sm text-gray-500">Konsentrasi: Teknologi Pendidikan</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start space-x-4">
+                        <div class="bg-blue-100 text-blue-600 p-3 rounded-full text-2xl">🎓</div>
+                        <div>
+                            <h3 class="font-bold text-xl">S1 - Sarjana Pendidikan (S.Pd)</h3>
+                            <p class="text-gray-600">Sekolah Tinggi Ilmu Keguruan dan Pendidikan (STKIP) Purnama</p>
+                            <p class="text-sm text-gray-500">Konsentrasi: Administrasi Perkantoran</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-gray-800 text-white py-8">
+        <div class="container mx-auto px-6 text-center">
+            <p>&copy; 2025 Portofolio Interaktif Muhammad Tasyhar, S.Pd., MM.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const experiences = [
+                { title: 'Guru SMKS Sastra Bawah', category: 'Pengajaran Akademis', icon: '🧑‍🏫' },
+                { title: 'Dosen STKIP Purnama Cijantung', category: 'Pengajaran Akademis', icon: '🧑‍🏫' },
+                { title: 'Dosen UNPAM, Tangerang Selatan, Banten', category: 'Pengajaran Akademis', icon: '🧑‍🏫' },
+                { title: 'Widyaiswara BBPPMPV Bispar Keahlian Adm. Perkantoran', category: 'Pelatihan & Fasilitasi', icon: '🏛️' },
+                { title: 'Fasilitator Peningkatan Kompetensi guru SMK se Indonesia', category: 'Pelatihan & Fasilitasi', icon: '🤝' },
+                { title: 'Trainner peningkatan kompetensi siswa', category: 'Pelatihan & Fasilitasi', icon: '🏋️' },
+                { title: 'Juri LKS Kompetensi Keahlian Adm. Perkantoran', category: 'Asesmen & Juri', icon: '🏆' },
+                { title: 'Narasumber Nasional Pelatihan Kurikulum 2013', category: 'Pelatihan & Fasilitasi', icon: '🎤' },
+                { title: 'Workplace assessor Indonesia Australia Partnership', category: 'Asesmen & Juri', icon: '📋' },
+                { title: 'Narasumber Nasional Peningkatan Kompetensi Kepala Sekolah dan Pengawas', category: 'Pelatihan & Fasilitasi', icon: '🎤' },
+                { title: 'Narasumber Nasional Pelatihan Peningkatan Kompetensi TAS (TU)', category: 'Pelatihan & Fasilitasi', icon: '🎤' },
+                { title: 'Penyusun Pedoman SMK Pusat Keunggulan (PK)', category: 'Pengembangan Konten', icon: '✍️' },
+                { title: 'Fasilitator Nasional Pendampingan Implementasi Pembelajaran (PIP) SMK PK', category: 'Pelatihan & Fasilitasi', icon: '🤝' },
+                { title: 'Training material design and delivery, Perth Academy', category: 'Pengembangan Konten', icon: '✍️' },
+                { title: 'Narasumber Nasional Kurikulum Merdeka', category: 'Pelatihan & Fasilitasi', icon: '🎤' },
+                { title: 'Narasumber Nasional Perencanaan Berbasis Data (PBD)', category: 'Pelatihan & Fasilitasi', icon: '🎤' },
+                { title: 'Penulis Bahan Ajar PKB Guru', category: 'Pengembangan Konten', icon: '📚' },
+                { title: 'Reviewer buku Adm. Perkantoran Penerbit Erlangga', category: 'Pengembangan Konten', icon: '📚' },
+            ];
+
+            const categoryCounts = experiences.reduce((acc, exp) => {
+                acc[exp.category] = (acc[exp.category] || 0) + 1;
+                return acc;
+            }, {});
+
+            const ctx = document.getElementById('experienceChart').getContext('2d');
+            new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                    labels: Object.keys(categoryCounts),
+                    datasets: [{
+                        label: 'Jumlah Pengalaman',
+                        data: Object.values(categoryCounts),
+                        backgroundColor: [
+                            'rgba(59, 130, 246, 0.8)',
+                            'rgba(16, 185, 129, 0.8)',
+                            'rgba(239, 68, 68, 0.8)',
+                            'rgba(249, 115, 22, 0.8)'
+                        ],
+                        borderColor: [
+                            'rgba(59, 130, 246, 1)',
+                            'rgba(16, 185, 129, 1)',
+                            'rgba(239, 68, 68, 1)',
+                            'rgba(249, 115, 22, 1)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    let label = context.label || '';
+                                    if (label) {
+                                        label += ': ';
+                                    }
+                                    if (context.parsed !== null) {
+                                        label += context.parsed + ' peran';
+                                    }
+                                    return label;
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+
+            const experienceList = document.getElementById('experience-list');
+            const filterBtns = document.querySelectorAll('.filter-btn');
+
+            const renderExperiences = (filter) => {
+                experienceList.innerHTML = '';
+                const filteredExperiences = (filter === 'all') ? experiences : experiences.filter(exp => exp.category === filter);
+                
+                filteredExperiences.forEach(exp => {
+                    const item = document.createElement('div');
+                    item.className = 'bg-white p-6 rounded-lg shadow-md border-l-4 border-blue-500 transition-transform transform hover:scale-105';
+                    item.innerHTML = `
+                        <div class="flex items-start space-x-4">
+                            <span class="text-3xl">${exp.icon}</span>
+                            <div>
+                                <h3 class="font-bold text-lg">${exp.title}</h3>
+                                <p class="text-sm text-gray-500">${exp.category}</p>
+                            </div>
+                        </div>`;
+                    experienceList.appendChild(item);
+                });
+            };
+
+            filterBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    filterBtns.forEach(b => b.classList.remove('active-filter'));
+                    btn.classList.add('active-filter');
+                    renderExperiences(btn.dataset.filter);
+                });
+            });
+
+            renderExperiences('all');
+        });
+    </script>
+</body>
+</html>
