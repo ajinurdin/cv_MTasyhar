@@ -9,10 +9,6 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <!-- Chosen Palette: Professional Calm -->
-    <!-- Application Structure Plan: Aplikasi ini dirancang dengan struktur tematik yang berfokus pada pengguna, bukan mengikuti urutan CV asli. Strukturnya adalah: 1. Header (Ringkasan Profesional), 2. Navigasi Cepat, 3. Visualisasi Keahlian (menggunakan Chart.js untuk ringkasan cepat), 4. Detail Pengalaman Interaktif (dengan filter kategori untuk memudahkan eksplorasi), 5. Pendidikan & Kontribusi Lainnya. Struktur ini dipilih untuk memungkinkan perekrut atau pihak yang berkepentingan dengan cepat memahami keahlian utama dan kemudian mendalami area spesifik yang relevan bagi mereka, meningkatkan kemudahan konsumsi informasi dan navigasi. -->
-    <!-- Visualization & Content Choices: 1. Ringkasan Pengalaman (Donut Chart): Info -> 18 item pengalaman kerja. Goal -> Sintesis & Ringkasan. Viz -> Donut Chart. Interaction -> Tooltip saat hover. Justification -> Memberikan gambaran visual yang cepat tentang fokus karier (misalnya, porsi terbesar pada Pelatihan & Fasilitasi). Library -> Chart.js. 2. Daftar Pengalaman (Filterable List): Info -> Detail setiap pengalaman. Goal -> Eksplorasi & Organisasi. Presentation -> Daftar yang dapat difilter. Interaction -> Klik tombol kategori untuk menampilkan/menyembunyikan item yang relevan. Justification -> Mengatasi daftar pengalaman yang panjang agar tidak membanjiri pengguna dan memungkinkan mereka fokus pada peran tertentu (misalnya, hanya melihat pengalaman sebagai Narasumber). Method -> Vanilla JS. -->
-    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
     <style>
         body {
             font-family: 'Inter', sans-serif;
@@ -32,6 +28,12 @@
                 height: 350px;
             }
         }
+        @media (max-width: 640px) {
+            .chart-container {
+                height: 220px;
+                max-width: 100vw;
+            }
+        }
         .active-filter {
             background-color: #3b82f6 !important;
             color: white !important;
@@ -42,51 +44,51 @@
 <body class="text-gray-800">
 
     <header class="bg-white shadow-sm sticky top-0 z-50">
-        <nav class="container mx-auto px-6 py-4 flex flex-col md:flex-row justify-between items-center">
-            <div class="flex items-center space-x-4 mb-4 md:mb-0">
-                <img src="foto_pp.jpeg" onerror="this.onerror=null; this.src='data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBAQEBAgEBBAQFCgYFBwYGAgYJBwYKDBUGCiQICzAgJCQkMDBYQEBAMJCQYKDw0QEw8QTXhEQg8YJkgyP//Z';" alt="Foto Muhammad Tasyhar" class="rounded-full w-24 h-24 object-cover border-4 border-white shadow-lg">
+        <nav class="container mx-auto px-2 sm:px-4 py-4 flex flex-col md:flex-row justify-between items-center">
+            <div class="flex items-center space-x-2 sm:space-x-4 mb-4 md:mb-0">
+                <img src="foto_pp.jpeg" onerror="this.onerror=null; this.src='data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBAQEBAgEBBAQFCgYFBwYGAgYJBwYKDBUGCiQICzAgJCQkMDBYQEBAMJCQYKDw0QEw8QTXhEQg8YJkgyP//Z';" alt="Foto Muhammad Tasyhar" class="rounded-full w-20 h-20 sm:w-24 sm:h-24 object-cover border-4 border-white shadow-lg">
                 <div>
-                    <h1 class="text-xl md:text-2xl font-bold text-blue-600">Muhammad Tasyhar, S.Pd., MM</h1>
-                    <p class="text-sm text-gray-500">Praktisi dan Ahli Pendidikan</p>
+                    <h1 class="text-lg sm:text-xl md:text-2xl font-bold text-blue-600">Muhammad Tasyhar, S.Pd., MM</h1>
+                    <p class="text-xs sm:text-sm text-gray-500">Praktisi dan Ahli Pendidikan</p>
                 </div>
             </div>
-            <div class="flex space-x-6">
-                <a href="#profil" class="text-gray-600 hover:text-blue-600 transition duration-300">Profil</a>
-                <a href="#visualisasi" class="text-gray-600 hover:text-blue-600 transition duration-300">Visualisasi Karier</a>
-                <a href="#pengalaman" class="text-gray-600 hover:text-blue-600 transition duration-300">Pengalaman</a>
-                <a href="#pendidikan" class="text-gray-600 hover:text-blue-600 transition duration-300">Pendidikan</a>
+            <div class="flex flex-wrap gap-2 sm:gap-6 justify-center">
+                <a href="#profil" class="text-gray-600 hover:text-blue-600 transition duration-300 text-sm sm:text-base">Profil</a>
+                <a href="#visualisasi" class="text-gray-600 hover:text-blue-600 transition duration-300 text-sm sm:text-base">Visualisasi Karier</a>
+                <a href="#pengalaman" class="text-gray-600 hover:text-blue-600 transition duration-300 text-sm sm:text-base">Pengalaman</a>
+                <a href="#pendidikan" class="text-gray-600 hover:text-blue-600 transition duration-300 text-sm sm:text-base">Pendidikan</a>
             </div>
         </nav>
     </header>
 
-    <main class="container mx-auto px-6 py-12">
-        <section id="profil" class="text-center mb-16">
-            <div class="max-w-4xl mx-auto bg-white p-8 rounded-xl shadow-md">
-                <h2 class="text-3xl font-bold text-gray-800 mb-4">Ringkasan Profesional</h2>
-                <p class="text-lg text-gray-600 leading-relaxed">
+    <main class="container mx-auto px-2 sm:px-6 py-6 sm:py-12">
+        <section id="profil" class="text-center mb-10 sm:mb-16">
+            <div class="max-w-4xl mx-auto bg-white p-4 sm:p-8 rounded-xl shadow-md">
+                <h2 class="text-2xl sm:text-3xl font-bold text-gray-800 mb-2 sm:mb-4">Ringkasan Profesional</h2>
+                <p class="text-base sm:text-lg text-gray-600 leading-relaxed">
                     Praktisi pendidikan dengan pengalaman lebih dari dua dekade, memiliki keahlian mendalam di bidang Administrasi Perkantoran, Pengembangan Kurikulum, dan Peningkatan Kompetensi Pendidik. Terbukti memiliki rekam jejak yang solid sebagai narasumber, fasilitator, penulis materi ajar, dan juri di tingkat nasional. Menguasai implementasi Kurikulum 2013, Kurikulum Merdeka, serta Perencanaan Berbasis Data (PBD) untuk kemajuan pendidikan Indonesia.
                 </p>
-                <div class="mt-8 flex justify-center items-center space-x-6 text-gray-600">
+                <div class="mt-6 sm:mt-8 flex flex-col sm:flex-row justify-center items-center space-y-2 sm:space-y-0 sm:space-x-6 text-gray-600">
                     <div class="flex items-center space-x-2">
                         <span class="text-xl">📧</span>
-                        <span>t5r181590@gmail.com</span>
+                        <span class="text-sm sm:text-base">t5r181590@gmail.com</span>
                     </div>
                     <div class="flex items-center space-x-2">
                         <span class="text-xl">📞</span>
-                        <span>081380121442/082114327776</span>
+                        <span class="text-sm sm:text-base">081380121442/082114327776</span>
                     </div>
                     <div class="flex items-center space-x-2">
                          <span class="text-xl">📍</span>
-                        <span>Depok, Jawa Barat</span>
+                        <span class="text-sm sm:text-base">Depok, Jawa Barat</span>
                     </div>
                 </div>
             </div>
         </section>
 
-        <section id="visualisasi" class="mb-16">
-            <div class="max-w-4xl mx-auto bg-white p-8 rounded-xl shadow-md">
-                <h2 class="text-3xl font-bold text-center mb-2">Visualisasi Jejak Karier</h2>
-                <p class="text-center text-gray-600 mb-8">
+        <section id="visualisasi" class="mb-10 sm:mb-16">
+            <div class="max-w-4xl mx-auto bg-white p-4 sm:p-8 rounded-xl shadow-md">
+                <h2 class="text-2xl sm:text-3xl font-bold text-center mb-2">Visualisasi Jejak Karier</h2>
+                <p class="text-center text-gray-600 mb-4 sm:mb-8">
                     Ringkasan visual ini mengkategorikan sebaran pengalaman profesional untuk memberikan gambaran cepat mengenai fokus dan kontribusi utama dalam dunia pendidikan. Arahkan kursor ke bagian diagram untuk melihat detail.
                 </p>
                 <div class="chart-container">
@@ -95,51 +97,51 @@
             </div>
         </section>
 
-        <section id="pengalaman" class="mb-16">
+        <section id="pengalaman" class="mb-10 sm:mb-16">
             <div class="max-w-4xl mx-auto">
-                <h2 class="text-3xl font-bold text-center mb-2">Pengalaman Profesional Interaktif</h2>
-                <p class="text-center text-gray-600 mb-8">
+                <h2 class="text-2xl sm:text-3xl font-bold text-center mb-2">Pengalaman Profesional Interaktif</h2>
+                <p class="text-center text-gray-600 mb-4 sm:mb-8">
                     Jelajahi beragam pengalaman dengan memilih kategori di bawah ini. Setiap peran mencerminkan kontribusi signifikan dalam peningkatan kualitas pendidikan dan sumber daya manusia di Indonesia.
                 </p>
-                <div id="filters" class="flex flex-wrap justify-center gap-2 md:gap-4 mb-8">
-                    <button data-filter="all" class="filter-btn active-filter text-sm md:text-base px-4 py-2 bg-white border-2 border-gray-300 text-gray-700 rounded-full hover:bg-blue-500 hover:text-white hover:border-blue-500 transition duration-300">Semua</button>
-                    <button data-filter="Pelatihan & Fasilitasi" class="filter-btn text-sm md:text-base px-4 py-2 bg-white border-2 border-gray-300 text-gray-700 rounded-full hover:bg-blue-500 hover:text-white hover:border-blue-500 transition duration-300">Pelatihan & Fasilitasi</button>
-                    <button data-filter="Pengembangan Konten" class="filter-btn text-sm md:text-base px-4 py-2 bg-white border-2 border-gray-300 text-gray-700 rounded-full hover:bg-blue-500 hover:text-white hover:border-blue-500 transition duration-300">Pengembangan Konten</button>
-                    <button data-filter="Asesmen & Juri" class="filter-btn text-sm md:text-base px-4 py-2 bg-white border-2 border-gray-300 text-gray-700 rounded-full hover:bg-blue-500 hover:text-white hover:border-blue-500 transition duration-300">Asesmen & Juri</button>
-                    <button data-filter="Pengajaran Akademis" class="filter-btn text-sm md:text-base px-4 py-2 bg-white border-2 border-gray-300 text-gray-700 rounded-full hover:bg-blue-500 hover:text-white hover:border-blue-500 transition duration-300">Pengajaran Akademis</button>
+                <div id="filters" class="flex flex-wrap justify-center gap-2 md:gap-4 mb-6 sm:mb-8">
+                    <button data-filter="all" class="filter-btn active-filter text-xs sm:text-sm md:text-base px-3 sm:px-4 py-2 bg-white border-2 border-gray-300 text-gray-700 rounded-full hover:bg-blue-500 hover:text-white hover:border-blue-500 transition duration-300">Semua</button>
+                    <button data-filter="Pelatihan & Fasilitasi" class="filter-btn text-xs sm:text-sm md:text-base px-3 sm:px-4 py-2 bg-white border-2 border-gray-300 text-gray-700 rounded-full hover:bg-blue-500 hover:text-white hover:border-blue-500 transition duration-300">Pelatihan & Fasilitasi</button>
+                    <button data-filter="Pengembangan Konten" class="filter-btn text-xs sm:text-sm md:text-base px-3 sm:px-4 py-2 bg-white border-2 border-gray-300 text-gray-700 rounded-full hover:bg-blue-500 hover:text-white hover:border-blue-500 transition duration-300">Pengembangan Konten</button>
+                    <button data-filter="Asesmen & Juri" class="filter-btn text-xs sm:text-sm md:text-base px-3 sm:px-4 py-2 bg-white border-2 border-gray-300 text-gray-700 rounded-full hover:bg-blue-500 hover:text-white hover:border-blue-500 transition duration-300">Asesmen & Juri</button>
+                    <button data-filter="Pengajaran Akademis" class="filter-btn text-xs sm:text-sm md:text-base px-3 sm:px-4 py-2 bg-white border-2 border-gray-300 text-gray-700 rounded-full hover:bg-blue-500 hover:text-white hover:border-blue-500 transition duration-300">Pengajaran Akademis</button>
                 </div>
 
-                <div id="experience-list" class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div id="experience-list" class="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
                 </div>
             </div>
         </section>
 
-        <section id="pendidikan" class="mb-16">
-            <div class="max-w-4xl mx-auto bg-white p-8 rounded-xl shadow-md">
-                <h2 class="text-3xl font-bold text-center mb-8">Pendidikan & Kualifikasi</h2>
-                 <div class="space-y-6">
-                    <div class="flex items-start space-x-4">
-                        <div class="bg-blue-100 text-blue-600 p-3 rounded-full text-2xl">🎓</div>
+        <section id="pendidikan" class="mb-10 sm:mb-16">
+            <div class="max-w-4xl mx-auto bg-white p-4 sm:p-8 rounded-xl shadow-md">
+                <h2 class="text-2xl sm:text-3xl font-bold text-center mb-6 sm:mb-8">Pendidikan & Kualifikasi</h2>
+                 <div class="space-y-4 sm:space-y-6">
+                    <div class="flex items-start space-x-2 sm:space-x-4">
+                        <div class="bg-blue-100 text-blue-600 p-2 sm:p-3 rounded-full text-xl sm:text-2xl">🎓</div>
                         <div>
-                            <h3 class="font-bold text-xl">S2 - Magister Manajemen (MM)</h3>
-                            <p class="text-gray-600">Sekolah Tinggi Ilmu Ekonomi (STIE), Indonesia School of Management (ISM)</p>
-                            <p class="text-sm text-gray-500">Konsentrasi: Manajemen Pendidikan</p>
+                            <h3 class="font-bold text-base sm:text-xl">S2 - Magister Manajemen (MM)</h3>
+                            <p class="text-gray-600 text-sm sm:text-base">Sekolah Tinggi Ilmu Ekonomi (STIE), Indonesia School of Management (ISM)</p>
+                            <p class="text-xs sm:text-sm text-gray-500">Konsentrasi: Manajemen Pendidikan</p>
                         </div>
                     </div>
-                    <div class="flex items-start space-x-4">
-                        <div class="bg-blue-100 text-blue-600 p-3 rounded-full text-2xl">🎓</div>
+                    <div class="flex items-start space-x-2 sm:space-x-4">
+                        <div class="bg-blue-100 text-blue-600 p-2 sm:p-3 rounded-full text-xl sm:text-2xl">🎓</div>
                         <div>
-                            <h3 class="font-bold text-xl">S2 - Magister Pendidikan (M.Pd)</h3>
-                            <p class="text-gray-600">Universitas Negeri Jakarta (UNJ)</p>
-                            <p class="text-sm text-gray-500">Konsentrasi: Teknologi Pendidikan</p>
+                            <h3 class="font-bold text-base sm:text-xl">S2 - Magister Pendidikan (M.Pd)</h3>
+                            <p class="text-gray-600 text-sm sm:text-base">Universitas Negeri Jakarta (UNJ)</p>
+                            <p class="text-xs sm:text-sm text-gray-500">Konsentrasi: Teknologi Pendidikan</p>
                         </div>
                     </div>
-                    <div class="flex items-start space-x-4">
-                        <div class="bg-blue-100 text-blue-600 p-3 rounded-full text-2xl">🎓</div>
+                    <div class="flex items-start space-x-2 sm:space-x-4">
+                        <div class="bg-blue-100 text-blue-600 p-2 sm:p-3 rounded-full text-xl sm:text-2xl">🎓</div>
                         <div>
-                            <h3 class="font-bold text-xl">S1 - Sarjana Pendidikan (S.Pd)</h3>
-                            <p class="text-gray-600">Sekolah Tinggi Ilmu Keguruan dan Pendidikan (STKIP) Purnama</p>
-                            <p class="text-sm text-gray-500">Konsentrasi: Administrasi Perkantoran</p>
+                            <h3 class="font-bold text-base sm:text-xl">S1 - Sarjana Pendidikan (S.Pd)</h3>
+                            <p class="text-gray-600 text-sm sm:text-base">Sekolah Tinggi Ilmu Keguruan dan Pendidikan (STKIP) Purnama</p>
+                            <p class="text-xs sm:text-sm text-gray-500">Konsentrasi: Administrasi Perkantoran</p>
                         </div>
                     </div>
                 </div>
@@ -147,9 +149,9 @@
         </section>
     </main>
 
-    <footer class="bg-gray-800 text-white py-8">
-        <div class="container mx-auto px-6 text-center">
-            <p>&copy; 2025 Portofolio Interaktif Muhammad Tasyhar, S.Pd., MM.</p>
+    <footer class="bg-gray-800 text-white py-6 sm:py-8">
+        <div class="container mx-auto px-2 sm:px-6 text-center">
+            <p class="text-xs sm:text-base">&copy; 2025 Portofolio Interaktif Muhammad Tasyhar, S.Pd., MM.</p>
         </div>
     </footer>
 
@@ -238,13 +240,13 @@
                 
                 filteredExperiences.forEach(exp => {
                     const item = document.createElement('div');
-                    item.className = 'bg-white p-6 rounded-lg shadow-md border-l-4 border-blue-500 transition-transform transform hover:scale-105';
+                    item.className = 'bg-white p-4 sm:p-6 rounded-lg shadow-md border-l-4 border-blue-500 transition-transform transform hover:scale-105';
                     item.innerHTML = `
-                        <div class="flex items-start space-x-4">
-                            <span class="text-3xl">${exp.icon}</span>
+                        <div class="flex items-start space-x-2 sm:space-x-4">
+                            <span class="text-2xl sm:text-3xl">${exp.icon}</span>
                             <div>
-                                <h3 class="font-bold text-lg">${exp.title}</h3>
-                                <p class="text-sm text-gray-500">${exp.category}</p>
+                                <h3 class="font-bold text-base sm:text-lg">${exp.title}</h3>
+                                <p class="text-xs sm:text-sm text-gray-500">${exp.category}</p>
                             </div>
                         </div>`;
                     experienceList.appendChild(item);
@@ -263,4 +265,3 @@
         });
     </script>
 </body>
-</html>
